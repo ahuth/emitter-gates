@@ -1,0 +1,15 @@
+{
+  "name": "algebra",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.3",
+    "jest": "^26.0.1",
+    "typescript": "^3.9.3"
+  }
+}
