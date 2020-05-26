@@ -8,10 +8,14 @@ export default class Wire {
   }
 
   allowCurrent() {
-    this.emitter.emit('signal', 1);
+    setTimeout(() => {
+      this.emitter.emit('signal', 1);
+    }, 0);
   }
 
   stopCurrent() {
-    this.emitter.emit('signal', 0);
+    setTimeout(() => {
+      this.emitter.emit('signal', 0);
+    }, 0);
   }
 }
