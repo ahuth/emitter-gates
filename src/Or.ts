@@ -1,11 +1,14 @@
+import Gate from './Gate';
 import Wire from './Wire';
 
-export default class Or {
+export default class Or extends Gate {
   output = new Wire();
   value1 = false;
   value2 = false;
 
-  constructor(input1: Wire, input2: Wire) {
+  constructor(input1: Gate | Wire, input2: Gate | Wire) {
+    super();
+
     input1.subscribe((value) => {
       this.value1 = value === 1;
       this.check();
@@ -29,11 +32,5 @@ export default class Or {
     }
 
     this.output.stopCurrent();
-  }
-
-  subscribe(callback: (value: 0 | 1) => void) {
-    this.output.subscribe(function (value) {
-      callback(value);
-    });
   }
 }

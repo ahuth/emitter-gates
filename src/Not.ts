@@ -1,9 +1,12 @@
+import Gate from './Gate';
 import Wire from './Wire';
 
-export default class Not {
+export default class Not extends Gate {
   output = new Wire();
 
-  constructor(input: Wire) {
+  constructor(input: Gate | Wire) {
+    super();
+
     input.subscribe((value) => {
       if (value) {
         this.output.stopCurrent();
@@ -11,9 +14,5 @@ export default class Not {
         this.output.allowCurrent();
       }
     });
-  }
-
-  subscribe(callback: (value: 0 | 1) => void) {
-    this.output.subscribe(callback);
   }
 }
