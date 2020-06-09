@@ -1,25 +1,25 @@
-import Wire from './Wire';
+import * as Wire from './Wire';
 
 test('allowing current', (done) => {
   expect.hasAssertions();
-  const wire = new Wire();
+  const wire = Wire.create();
 
-  wire.subscribe((value) => {
+  Wire.subscribe(wire, (value) => {
     expect(value).toEqual(1);
     done();
   });
 
-  wire.allowCurrent();
+  Wire.send(wire, 1);
 });
 
 test('stopping current', (done) => {
   expect.hasAssertions();
-  const wire = new Wire();
+  const wire = Wire.create();
 
-  wire.subscribe((value) => {
+  Wire.subscribe(wire, (value) => {
     expect(value).toEqual(0);
     done();
   });
 
-  wire.stopCurrent();
+  Wire.send(wire, 0);
 });

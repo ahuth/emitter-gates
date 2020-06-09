@@ -1,18 +1,11 @@
-import Gate from './Gate';
-import Wire from './Wire';
+import * as Wire from './Wire';
 
-export default class Not extends Gate {
-  output = new Wire();
+export function create(input: Wire.Type): Wire.Type {
+  const output = Wire.create();
 
-  constructor(input: Gate | Wire) {
-    super();
+  Wire.subscribe(input, (value) => {
+    Wire.send(output, value ? 0 : 1);
+  });
 
-    input.subscribe((value) => {
-      if (value) {
-        this.output.stopCurrent();
-      } else {
-        this.output.allowCurrent();
-      }
-    });
-  }
+  return output;
 }

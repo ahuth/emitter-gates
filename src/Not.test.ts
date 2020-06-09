@@ -1,28 +1,28 @@
-import Not from './Not';
-import Wire from './Wire';
+import * as Not from './Not';
+import * as Wire from './Wire';
 
 test('inverting 1', (done) => {
   expect.hasAssertions();
-  const input = new Wire();
-  const output = new Not(input);
+  const input = Wire.create();
+  const output = Not.create(input);
 
-  output.subscribe((value) => {
+  Wire.subscribe(output, (value) => {
     expect(value).toEqual(0);
     done();
   });
 
-  input.allowCurrent();
+  Wire.send(input, 1);
 });
 
 test('inverting 0', (done) => {
   expect.hasAssertions();
-  const input = new Wire();
-  const output = new Not(input);
+  const input = Wire.create();
+  const output = Not.create(input);
 
-  output.subscribe((value) => {
+  Wire.subscribe(output, (value) => {
     expect(value).toEqual(1);
     done();
   });
 
-  input.stopCurrent();
+  Wire.send(input, 0);
 });

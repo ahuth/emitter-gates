@@ -1,21 +1,18 @@
 import { EventEmitter } from 'events';
 
-export default class Wire {
-  emitter = new EventEmitter();
+type Wire = EventEmitter;
+export type Type = Wire;
 
-  subscribe(callback: (value: 0 | 1) => void) {
-    this.emitter.on('signal', callback);
-  }
+export function create(): Wire {
+  return new EventEmitter();
+}
 
-  allowCurrent() {
-    setTimeout(() => {
-      this.emitter.emit('signal', 1);
-    }, 0);
-  }
+export function subscribe(wire: Wire, callback: (value: 0 | 1) => void): void {
+  wire.on('signal', callback);
+}
 
-  stopCurrent() {
-    setTimeout(() => {
-      this.emitter.emit('signal', 0);
-    }, 0);
-  }
+export function send(wire: Wire, signal: 0 | 1): void {
+  setTimeout(() => {
+    wire.emit('signal', signal);
+  }, 0);
 }

@@ -1,68 +1,68 @@
-import Or from './Or';
-import Wire from './Wire';
+import * as Or from './Or';
+import * as Wire from './Wire';
 
 test('0, 0', (done) => {
   expect.hasAssertions();
-  const input1 = new Wire();
-  const input2 = new Wire();
-  const output = new Or(input1, input2);
+  const input1 = Wire.create();
+  const input2 = Wire.create();
+  const output = Or.create(input1, input2);
 
-  output.subscribe(function (value) {
+  Wire.subscribe(output, function (value) {
     expect(value).toEqual(0);
     done();
   });
 
-  input1.stopCurrent();
-  input2.stopCurrent();
+  Wire.send(input1, 0)
+  Wire.send(input2, 0)
 });
 
 test('0, 1', (done) => {
   expect.hasAssertions();
-  const input1 = new Wire();
-  const input2 = new Wire();
-  const output = new Or(input1, input2);
+  const input1 = Wire.create();
+  const input2 = Wire.create();
+  const output = Or.create(input1, input2);
 
-  output.subscribe(function (value) {
+  Wire.subscribe(output, function (value) {
     if (value) {
       expect(value).toEqual(1);
       done();
     }
   });
 
-  input1.stopCurrent();
-  input2.allowCurrent();
+  Wire.send(input1, 0);
+  Wire.send(input2, 1);
 });
 
 test('1, 0', (done) => {
   expect.hasAssertions();
-  const input1 = new Wire();
-  const input2 = new Wire();
-  const output = new Or(input1, input2);
+  const input1 = Wire.create();
+  const input2 = Wire.create();
+  const output = Or.create(input1, input2);
 
-  output.subscribe(function (value) {
+  Wire.subscribe(output, function (value) {
     if (value) {
       expect(value).toEqual(1);
       done();
     }
   });
 
-  input1.allowCurrent();
-  input2.stopCurrent();
+  Wire.send(input1, 1);
+  Wire.send(input2, 0)
 });
 
 test('1, 1', (done) => {
   expect.hasAssertions();
-  const input1 = new Wire();
-  const input2 = new Wire();
-  const output = new Or(input1, input2);
+  const input1 = Wire.create();
+  const input2 = Wire.create();
+  const output = Or.create(input1, input2);
 
-  output.subscribe(function (value) {
+  Wire.subscribe(output, function (value) {
     if (value) {
       expect(value).toEqual(1);
       done();
     }
   });
 
-  input1.allowCurrent();
-  input2.allowCurrent();
+  Wire.send(input1, 1);
+  Wire.send(input2, 1);
 });
