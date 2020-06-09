@@ -24,10 +24,11 @@ test('stopping current', (done) => {
   Wire.send(wire, 0);
 });
 
-test('extending', (done) => {
+test('connecting', (done) => {
   expect.hasAssertions();
   const input = Wire.create();
-  const output = Wire.extend(input);
+  const output = Wire.create();
+  Wire.connect(input, output);
 
   Wire.collectSignals(output, 3).then(function (signals) {
     expect(signals).toEqual([0, 1, 0]);

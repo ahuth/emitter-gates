@@ -19,12 +19,9 @@ export function send(wire: Wire, signal: Signal): void {
 }
 
 /**
- * Create a new wire that is an extension of another wire. That is, whatever signal passes through
- * the input wire, also passes through the new wire.
+ * Connect two wires, so that any signal passing through the input also passes through the output.
  */
-export function extend(input: Wire) {
-  const output = create();
-
+export function connect(input: Wire, output: Wire) {
   subscribe(input, (value) => {
     send(output, value);
   });
