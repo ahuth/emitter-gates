@@ -26,15 +26,17 @@ test('stopping current', (done) => {
 
 test('connecting wries', async () => {
   expect.hasAssertions();
-  const input = Wire.create();
-  const output = Wire.create();
+  const a = Wire.create();
+  const b = Wire.create();
+  const c = Wire.create();
 
-  Wire.connect(input, output);
-  Wire.send(input, 0);
-  Wire.send(input, 1);
-  Wire.send(input, 0);
+  Wire.connect(a, b);
+  Wire.connect(b, c);
+  Wire.send(a, 0);
+  Wire.send(a, 1);
+  Wire.send(a, 0);
 
-  const signals = await Wire.collectSignals(output, 3);
+  const signals = await Wire.collectSignals(c, 3);
   expect(signals).toEqual([0, 1, 0]);
 });
 
