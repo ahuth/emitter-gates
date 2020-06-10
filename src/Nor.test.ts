@@ -1,70 +1,54 @@
 import * as Nor from './Nor';
 import * as Wire from './Wire';
 
-test('0, 0', (done) => {
+test('0, 0', async () => {
   expect.hasAssertions();
   const input1 = Wire.create();
   const input2 = Wire.create();
   const output = Nor.create(input1, input2);
 
-  Wire.subscribe(output, function (value) {
-    if (value) {
-      expect(value).toEqual(1);
-      done();
-    }
-  });
+  Wire.send(input1, 0);
+  Wire.send(input2, 0);
 
-  Wire.send(input1, 0)
-  Wire.send(input2, 0)
+  const signals = await Wire.collectSignals(output, 2);
+  expect(signals).toEqual([1, 1]);
 });
 
-test('0, 1', (done) => {
+test('0, 1', async () => {
   expect.hasAssertions();
   const input1 = Wire.create();
   const input2 = Wire.create();
   const output = Nor.create(input1, input2);
-
-  Wire.subscribe(output, function (value) {
-    if (!value) {
-      expect(value).toEqual(0);
-      done();
-    }
-  });
 
   Wire.send(input1, 0);
   Wire.send(input2, 1);
+
+  const signals = await Wire.collectSignals(output, 2);
+  expect(signals).toEqual([1, 0]);
 });
 
-test('1, 0', (done) => {
+test('1, 0', async () => {
   expect.hasAssertions();
   const input1 = Wire.create();
   const input2 = Wire.create();
   const output = Nor.create(input1, input2);
-
-  Wire.subscribe(output, function (value) {
-    if (!value) {
-      expect(value).toEqual(0);
-      done();
-    }
-  });
 
   Wire.send(input1, 1);
-  Wire.send(input2, 0)
+  Wire.send(input2, 0);
+
+  const signals = await Wire.collectSignals(output, 2);
+  expect(signals).toEqual([0, 0]);
 });
 
-test('1, 1', (done) => {
+test('1, 1', async () => {
   expect.hasAssertions();
   const input1 = Wire.create();
   const input2 = Wire.create();
   const output = Nor.create(input1, input2);
-
-  Wire.subscribe(output, function (value) {
-    if (!value) {
-      expect(value).toEqual(0);
-      done();
-    }
-  });
 
   Wire.send(input1, 1);
   Wire.send(input2, 1);
+
+  const signals = await Wire.collectSignals(output, 2);
+  expect(signals).toEqual([0, 0]);
 });
