@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import * as Wire from './Wire';
 
 export function create(input1: Wire.Type, input2: Wire.Type): Wire.Type {
@@ -15,7 +16,9 @@ export function create(input1: Wire.Type, input2: Wire.Type): Wire.Type {
     check();
   })
 
-  function check() {
+  // Debouncing the check function ensures that if each input receives a signal in close succession,
+  // we'll only emit a single output event.
+  const check = debounce(function () {
     if (value1) {
       Wire.send(output, 1);
       return;
@@ -27,7 +30,7 @@ export function create(input1: Wire.Type, input2: Wire.Type): Wire.Type {
     }
 
     Wire.send(output, 0);
-  }
+  }, 10);
 
   return output;
 }
