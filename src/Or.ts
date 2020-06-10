@@ -1,5 +1,10 @@
 import debounce from 'lodash.debounce';
 import * as Wire from './Wire';
+import { propagationDelay } from './Wire';
+
+// Wires have a slight propagation delay in them. Calculate our debounce delay based on that. Note
+// that we add 1 first, just in case it is 0.
+const debounceDelay = (propagationDelay + 1) * 10;
 
 export function create(input1: Wire.Type, input2: Wire.Type): Wire.Type {
   const output = Wire.create();
@@ -30,7 +35,7 @@ export function create(input1: Wire.Type, input2: Wire.Type): Wire.Type {
     }
 
     Wire.send(output, 0);
-  }, 10);
+  }, debounceDelay);
 
   return output;
 }

@@ -4,6 +4,8 @@ type Signal = 0 | 1;
 type Wire = EventEmitter;
 export type Type = Wire;
 
+export const propagationDelay = 0;
+
 export function create(): Wire {
   return new EventEmitter();
 }
@@ -15,7 +17,7 @@ export function subscribe(wire: Wire, callback: (value: Signal) => void): void {
 export function send(wire: Wire, signal: Signal): void {
   setTimeout(() => {
     wire.emit('signal', signal);
-  }, 0);
+  }, propagationDelay);
 }
 
 /**
