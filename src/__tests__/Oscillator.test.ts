@@ -1,5 +1,5 @@
-import * as Oscillator from './Oscillator';
-import * as Wire from './Wire';
+import * as Oscillator from '../Oscillator';
+import * as Wire from '../Wire';
 
 test('oscillation', async () => {
   const output = Oscillator.create();

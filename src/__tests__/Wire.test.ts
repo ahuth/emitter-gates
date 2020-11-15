@@ -1,4 +1,4 @@
-import * as Wire from './Wire';
+import * as Wire from '../Wire';
 
 test('starting current', (done) => {
   expect.hasAssertions();

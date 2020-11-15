@@ -1,5 +1,5 @@
-import * as Nor from './Nor';
-import * as Wire from './Wire';
+import * as Nor from '../Nor';
+import * as Wire from '../Wire';
 
 test('0, 0', async () => {
   expect.hasAssertions();

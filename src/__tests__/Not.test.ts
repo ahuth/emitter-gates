@@ -1,5 +1,5 @@
-import * as Not from './Not';
-import * as Wire from './Wire';
+import * as Not from '../Not';
+import * as Wire from '../Wire';
 
 test('inverting 1', (done) => {
   expect.hasAssertions();
